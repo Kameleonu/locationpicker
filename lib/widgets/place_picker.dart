@@ -29,14 +29,19 @@ class PlacePicker extends StatefulWidget {
   final LatLng? displayLocation;
   LocalizationItem? localizationItem;
   LatLng defaultLocation = LatLng(10.5381264, 73.8827201);
+  bool disableNearbyPlaces = false;
 
   PlacePicker(this.apiKey,
-      {this.displayLocation, this.localizationItem, LatLng? defaultLocation}) {
+      {this.displayLocation, this.localizationItem, LatLng? defaultLocation, this.disableNearbyPlaces = false}) {
     if (this.localizationItem == null) {
       this.localizationItem = new LocalizationItem();
     }
     if (defaultLocation != null) {
       this.defaultLocation = defaultLocation;
+    }
+
+    if (disableNearbyPlaces) {
+      this.disableNearbyPlaces = disableNearbyPlaces;
     }
   }
 
@@ -589,7 +594,9 @@ class PlacePickerState extends State<PlacePicker> {
 
     reverseGeocodeLatLng(latLng);
 
-    getNearbyPlaces(latLng);
+    if(widget.disableNearbyPlaces) {
+      getNearbyPlaces(latLng);
+    }
   }
 
   void moveToCurrentUserLocation() async {
