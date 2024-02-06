@@ -196,11 +196,11 @@ class PlacePickerState extends State<PlacePicker> {
                     }, widget.localizationItem!.tapToSelectLocation),
                     Divider(height: 8),
                     !widget.disableNearby ?
-                    Padding(
-                      child: Text(widget.localizationItem!.nearBy,
-                          style: TextStyle(fontSize: 16)),
-                      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                    ) : Container(),
+                      Padding(
+                        child: Text(widget.localizationItem!.nearBy,
+                            style: TextStyle(fontSize: 16)),
+                        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                      ) : Container(),
                     !widget.disableNearby ?
                       Expanded(
                         child: ListView(
@@ -213,7 +213,6 @@ class PlacePickerState extends State<PlacePicker> {
                               .toList(),
                         ),
                       ) : Container(),
-                    }
                   ],
                 ),
               ),
