@@ -29,10 +29,10 @@ class PlacePicker extends StatefulWidget {
   final LatLng? displayLocation;
   LocalizationItem? localizationItem;
   LatLng defaultLocation = LatLng(10.5381264, 73.8827201);
-  bool disableNearbyPlaces = false;
+  bool disableNearby = false;
 
   PlacePicker(this.apiKey,
-      {this.displayLocation, this.localizationItem, LatLng? defaultLocation, this.disableNearbyPlaces = false}) {
+      {this.displayLocation, this.localizationItem, LatLng? defaultLocation, this.disableNearby = false}) {
     if (this.localizationItem == null) {
       this.localizationItem = new LocalizationItem();
     }
@@ -40,8 +40,8 @@ class PlacePicker extends StatefulWidget {
       this.defaultLocation = defaultLocation;
     }
 
-    if (disableNearbyPlaces) {
-      this.disableNearbyPlaces = disableNearbyPlaces;
+    if (disableNearby) {
+      this.disableNearby = disableNearby;
     }
   }
 
@@ -195,22 +195,25 @@ class PlacePickerState extends State<PlacePicker> {
                       }
                     }, widget.localizationItem!.tapToSelectLocation),
                     Divider(height: 8),
+                    !widget.disableNearby ?
                     Padding(
                       child: Text(widget.localizationItem!.nearBy,
                           style: TextStyle(fontSize: 16)),
                       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                    ),
-                    Expanded(
-                      child: ListView(
-                        children: nearbyPlaces
-                            .map((it) => NearbyPlaceItem(it, () {
-                                  if (it.latLng != null) {
-                                    moveToLocation(it.latLng!);
-                                  }
-                                }))
-                            .toList(),
-                      ),
-                    ),
+                    ) : Container(),
+                    !widget.disableNearby ?
+                      Expanded(
+                        child: ListView(
+                          children: nearbyPlaces
+                              .map((it) => NearbyPlaceItem(it, () {
+                                    if (it.latLng != null) {
+                                      moveToLocation(it.latLng!);
+                                    }
+                                  }))
+                              .toList(),
+                        ),
+                      ) : Container(),
+                    }
                   ],
                 ),
               ),
@@ -594,7 +597,7 @@ class PlacePickerState extends State<PlacePicker> {
 
     reverseGeocodeLatLng(latLng);
 
-    if(widget.disableNearbyPlaces) {
+    if(!widget.disableNearby) {
       getNearbyPlaces(latLng);
     }
   }
