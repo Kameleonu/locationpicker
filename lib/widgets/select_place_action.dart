@@ -4,8 +4,9 @@ class SelectPlaceAction extends StatelessWidget {
   final String locationName;
   final String tapToSelectActionText;
   final VoidCallback onTap;
+  final bool disableNearby;
 
-  SelectPlaceAction(this.locationName, this.onTap, this.tapToSelectActionText);
+  SelectPlaceAction(this.locationName, this.onTap, this.tapToSelectActionText, this.disableNearby);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class SelectPlaceAction extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: this.disableNearby ? 0 : 16),
           child: Row(
             children: <Widget>[
               Expanded(
