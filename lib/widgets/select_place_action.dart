@@ -14,7 +14,7 @@ class SelectPlaceAction extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: this.disableNearby ? 0 : 16),
+          padding: EdgeInsets.symmetric(horizontal: this.disableNearby ? 0 : 24, vertical: 16),
           child: Row(
             children: <Widget>[
               Expanded(
