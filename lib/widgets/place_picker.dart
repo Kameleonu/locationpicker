@@ -193,7 +193,7 @@ class PlacePickerState extends State<PlacePicker> {
                       } else {
                         Navigator.of(context).pop(this.locationResult);
                       }
-                    }, widget.localizationItem!.tapToSelectLocation),
+                    }, widget.localizationItem!.tapToSelectLocation, widget.disableNearby),
                     Divider(height: 8),
                     Padding(
                       child: Text(widget.localizationItem!.nearBy,
