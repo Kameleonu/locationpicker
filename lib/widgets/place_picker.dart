@@ -182,7 +182,7 @@ class PlacePickerState extends State<PlacePicker> {
                       markers: markers,
                     ),
             ),
-            if (!this.hasSearchTerm && !widget.disableNearby)
+            if (!this.hasSearchTerm && !widget.disableNearby) {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -214,6 +214,22 @@ class PlacePickerState extends State<PlacePicker> {
                   ],
                 ),
               ),
+            } else {
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SelectPlaceAction(getLocationName(), () {
+                      if (Platform.isAndroid) {
+                        _delayedPop();
+                      } else {
+                        Navigator.of(context).pop(this.locationResult);
+                      }
+                    }, widget.localizationItem!.tapToSelectLocation),
+                  ],
+                ),
+              ),
+            }
           ],
         ),
       ),
