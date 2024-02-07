@@ -182,7 +182,7 @@ class PlacePickerState extends State<PlacePicker> {
                       markers: markers,
                     ),
             ),
-            if (!this.hasSearchTerm && !widget.disableNearby) {
+            !this.hasSearchTerm && !widget.disableNearby ?
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -213,8 +213,7 @@ class PlacePickerState extends State<PlacePicker> {
                     ),
                   ],
                 ),
-              ),
-            } else {
+              ) : 
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -229,7 +228,6 @@ class PlacePickerState extends State<PlacePicker> {
                   ],
                 ),
               ),
-            }
           ],
         ),
       ),
