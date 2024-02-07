@@ -185,7 +185,7 @@ class PlacePickerState extends State<PlacePicker> {
             !this.hasSearchTerm && !widget.disableNearby ?
               Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     SelectPlaceAction(getLocationName(), () {
                       if (Platform.isAndroid) {
