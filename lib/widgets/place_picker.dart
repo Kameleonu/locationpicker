@@ -185,7 +185,7 @@ class PlacePickerState extends State<PlacePicker> {
             !this.hasSearchTerm && !widget.disableNearby ?
               Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     SelectPlaceAction(getLocationName(), () {
                       if (Platform.isAndroid) {
@@ -214,19 +214,17 @@ class PlacePickerState extends State<PlacePicker> {
                   ],
                 ),
               ) : 
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SelectPlaceAction(getLocationName(), () {
-                      if (Platform.isAndroid) {
-                        _delayedPop();
-                      } else {
-                        Navigator.of(context).pop(this.locationResult);
-                      }
-                    }, widget.localizationItem!.tapToSelectLocation, widget.disableNearby),
-                  ],
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SelectPlaceAction(getLocationName(), () {
+                    if (Platform.isAndroid) {
+                      _delayedPop();
+                    } else {
+                      Navigator.of(context).pop(this.locationResult);
+                    }
+                  }, widget.localizationItem!.tapToSelectLocation, widget.disableNearby),
+                ],
               ),
           ],
         ),
