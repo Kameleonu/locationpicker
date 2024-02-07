@@ -182,7 +182,7 @@ class PlacePickerState extends State<PlacePicker> {
                       markers: markers,
                     ),
             ),
-            if (!this.hasSearchTerm)
+            if (!this.hasSearchTerm && !widget.disableNearby)
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,24 +195,22 @@ class PlacePickerState extends State<PlacePicker> {
                       }
                     }, widget.localizationItem!.tapToSelectLocation),
                     Divider(height: 8),
-                    !widget.disableNearby ?
-                      Padding(
-                        child: Text(widget.localizationItem!.nearBy,
-                            style: TextStyle(fontSize: 16)),
-                        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                      ) : Container(),
-                    !widget.disableNearby ?
-                      Expanded(
-                        child: ListView(
-                          children: nearbyPlaces
-                              .map((it) => NearbyPlaceItem(it, () {
-                                    if (it.latLng != null) {
-                                      moveToLocation(it.latLng!);
-                                    }
-                                  }))
-                              .toList(),
-                        ),
-                      ) : Container(),
+                    Padding(
+                      child: Text(widget.localizationItem!.nearBy,
+                          style: TextStyle(fontSize: 16)),
+                      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                    ),
+                    Expanded(
+                      child: ListView(
+                        children: nearbyPlaces
+                            .map((it) => NearbyPlaceItem(it, () {
+                                  if (it.latLng != null) {
+                                    moveToLocation(it.latLng!);
+                                  }
+                                }))
+                            .toList(),
+                      ),
+                    ),
                   ],
                 ),
               ),
